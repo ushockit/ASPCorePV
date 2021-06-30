@@ -24,8 +24,7 @@ namespace Lesson_02.Middleware
                     Expires = new DateTimeOffset(new DateTime(2030, 1, 1))
                 });
             }
-            await context.Response.WriteAsync("Hello");
-            //await _next.Invoke(context);
+            await _next.Invoke(context);
         }
     }
 }

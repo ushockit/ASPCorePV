@@ -16,7 +16,7 @@ namespace Lesson_02.Middleware
         {
             string userIp = context.Connection.RemoteIpAddress.ToString();
             context.Items.Add("ip", userIp);
-            await context.Response.WriteAsync($"IP = {userIp}");
+            //await context.Response.WriteAsync($"IP = {userIp}");
             await _next.Invoke(context);
         }
     }

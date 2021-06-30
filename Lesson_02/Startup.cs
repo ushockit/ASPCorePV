@@ -40,25 +40,36 @@ namespace Lesson_02
             }
 
 
-            app.UseMiddleware<IPVerificationMiddleware>();
-            //app.UseMiddleware<LanguageMiddleware>();
+            //app.UseMiddleware<IPVerificationMiddleware>();
+            app.UseMiddleware<LanguageMiddleware>();
             app.UseRouting();
+
+            app.Map("/index", (home) =>
+            {
+                home.Run(async (context) =>
+                {
+                    // обработка POST запроса
+                    if (context.Request.Method == "POST")
+                    {
+                        string inputValue = context.Request.Form["inputValue"].ToString();
+                        ;
+                    }
+                    context.Response.ContentType = "text/html";
+                    await context.Response.WriteAsync("<form method='post'><input name='inputValue'><button>Send</button></form>");
+                });
+            });
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    if (context.Request.Method == "POST")
-                    {
-                        ;
-                    }
                     // if (!context.Session.Keys.Contains("lang"))
                     // {
                     //    context.Session.SetString("lang", "ru");
                     //}
                     string ip = context.Items["ip"] as string;
                     context.Response.ContentType = "text/html";
-                    await context.Response.WriteAsync("<form method='post'><input name='inputValue'><button>Send</button></form>");
+                    await context.Response.WriteAsync("Hello world");
                 });
             });
         }
