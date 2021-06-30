@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Business\" />
+    <None Remove="Business\Interfaces\" />
+    <None Remove="Business\Implementation\" />
+    <None Remove="Middleware\" />
+    <None Remove="Services\" />
+    <None Remove="Common\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Business\" />
+    <Folder Include="Business\Interfaces\" />
+    <Folder Include="Business\Implementation\" />
+    <Folder Include="Middleware\" />
+    <Folder Include="Services\" />
+    <Folder Include="Common\" />
+  </ItemGroup>
+</Project>
