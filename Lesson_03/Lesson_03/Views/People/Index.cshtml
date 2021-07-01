@@ -1,0 +1,16 @@
+﻿<h1>People</h1>
+<a href="/people/create">Create a new person</a>
+<ul>
+    @foreach(var person in ViewBag.PeopleList)
+    {
+        <li>
+            <div class="person">
+                <div>#@person.Id</div>
+                <div>@person.FirstName</div>
+                <div>@person.LastName</div>
+                <div>@person.Birth</div>
+                <div><a href="/people/info?id=@person.Id">More...</a></div>
+            </div>
+        </li>
+    }
+</ul>

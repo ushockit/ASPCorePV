@@ -1,0 +1,11 @@
+﻿@using Lesson_03.Models;
+@{
+    var person = @ViewData["viewPerson"] as Person;
+}
+
+<div>
+    <div>Id = @person.Id</div>
+    <div>First name = @person.FirstName</div>
+    <div>Last name = @person.LastName</div>
+    <div>Birth = @person.Birth</div>
+</div>
