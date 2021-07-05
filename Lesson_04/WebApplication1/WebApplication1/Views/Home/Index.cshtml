@@ -1,0 +1,29 @@
+﻿@* Строготипизированное представление *@
+@model HomeIndexViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div class="people-list">
+    @foreach (var person in Model.People)
+    {
+        @*<li class="list-group-item">#@person.Id @person.LastName @person.FirstName @person.Birth</li>*@
+        @await Html.PartialAsync("_PersonCard", person)
+    }
+</div>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(() => {
+            $('.check-disabled').change(function (ev) {
+                $(this).parent('.disabled-person-form').submit();
+            });
+        });
+    </script>
+}

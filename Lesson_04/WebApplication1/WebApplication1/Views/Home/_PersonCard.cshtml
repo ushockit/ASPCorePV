@@ -1,0 +1,24 @@
+﻿@using WebApplication1.Storage.Models;
+@model Person
+
+@{ 
+    string disabledClass = Model.Disabled ? "disabled" : "";
+    string checkedAttr = Model.Disabled ? "checked" : "";
+}
+
+<div class="card person-card @disabledClass" style="width: 18rem;">
+    <img src="https://pngimg.com/uploads/mario/mario_PNG53.png" width="100" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">@Model.LastName @Model.FirstName</h5>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <p class="card-text">@Model.Birth</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+    <div class="mb-3 form-check">
+        <form action="/Home/DisablePerson" class="disabled-person-form" method="post">
+            <input type="hidden" name="id" value="@Model.Id" />
+            <input type="checkbox" class="form-check-input check-disabled" name="disabled" @checkedAttr id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Disable</label>
+        </form>
+    </div>
+</div>
