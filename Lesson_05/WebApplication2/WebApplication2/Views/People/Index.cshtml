@@ -1,0 +1,15 @@
+﻿@model PeopleIndexViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<a asp-controller="People" asp-action="Create">Add a new person</a>
+<ul class="list-group">
+    @foreach (var person in Model.People)
+    {
+        <li class="list-group-item">
+            <img src="@person.Avatar" width="100" alt="Alternate Text" />
+            <p>#@person.Id @person.FirstName @person.LastName @person.Birth</p>
+        </li>
+    }
+</ul>

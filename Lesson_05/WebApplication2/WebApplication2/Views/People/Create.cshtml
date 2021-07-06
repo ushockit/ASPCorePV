@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="avatarInput" class="form-label">Avatar</label>
+            <input type="file" name="avatar" class="form-control" id="avatarInput">
+        </div>
+        <div class="mb-3">
+            <label for="firstNameInput" class="form-label">First name</label>
+            <input type="text" name="firstName" class="form-control" id="firstNameInput" value="Vasya" placeholder="Enter first name...">
+        </div>
+        <div class="mb-3">
+            <label for="lastNameInput" class="form-label">Last name</label>
+            <input type="text" name="lastName" class="form-control" id="lastNameInput" value="Pupkin" placeholder="Enter last name...">
+        </div>
+        <div class="mb-3">
+            <label for="birthInput" class="form-label">Birth</label>
+            <input type="date" name="birth" class="form-control" id="birthInput" value="2000-10-01" placeholder="Enter birth...">
+        </div>
+        <button class="btn btn-primary">Create</button>
+    </form>
+</div>
