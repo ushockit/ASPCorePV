@@ -1,0 +1,9 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    @*asp-all-route-data='new Dictionary<string,string>{ { "id", "5" }, {"name", "tom" }, { "age", "18" } }'*@
+        <a asp-controller="Products" asp-action="Index">View all products</a>
+</div>

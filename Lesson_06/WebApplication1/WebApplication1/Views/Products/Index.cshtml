@@ -1,0 +1,17 @@
+﻿@model ProductsIndexViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<ul class="list-group">
+    @foreach (var prod in Model.Products)
+    {
+        <li class="list-group-item">
+            <div>#@prod.Id @prod.Title @prod.Description $@prod.Price @prod.Category.Name</div>
+            <form asp-controller="Products" asp-action="AddToCart" method="post">
+                <input type="hidden" name="id" value="@prod.Id" />
+                <button class="btn btn-primary">Add to cart</button>
+            </form>
+        </li>
+    }
+</ul>
