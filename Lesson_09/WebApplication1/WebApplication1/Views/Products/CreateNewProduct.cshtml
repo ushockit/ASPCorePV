@@ -1,0 +1,33 @@
+﻿@model WebApplication1.Models.CreateNewProductViewModel
+
+@{
+    ViewData["Title"] = "CreateNewProduct";
+}
+
+<h1>CreateNewProduct</h1>
+
+<h4>CreateNewProductViewModel</h4>
+<hr />
+<div class="form-group">
+    @using (Html.BeginForm("CreateNewProduct", "Products", FormMethod.Post))
+    {
+        <div class="col-md-4">
+            @Html.LabelFor(m => m.Name)
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        </div>
+        <div class="col-md-4">
+            @Html.LabelFor(m => m.Price)
+            @Html.TextBoxFor(m => m.Price, new { @class = "form-control", type = "number" })
+        </div>
+        @*<div class="col-md-4">
+                @Html.LabelFor(m => m.CategoryId)
+                @Html.ListBoxFor(m => m.CategoryId, )
+            </div>*@
+        <button>Send</button>
+    }
+
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

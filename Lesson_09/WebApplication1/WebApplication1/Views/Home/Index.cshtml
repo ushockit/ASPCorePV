@@ -1,0 +1,49 @@
+﻿@model IndexViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    @Html.Hidden("id", 1)
+    <div>
+        @Html.Label("FirstName", "First name")
+        @Html.TextBox("FirstName", "", new { type = "text" })
+    </div>
+
+    <div>
+        @Html.Label("Comment", "Comment")
+        @Html.TextArea("Comment", "", 5, 20, null)
+    </div>
+
+    <div>
+        @Html.Label("Password", "Your password")
+        @Html.Password("Password", "")
+    </div>
+
+    <div>
+        @Html.CheckBox("Remember", false)
+        @Html.Label("Remember", "Remember me?")
+    </div>
+
+    <div>
+        @foreach (string val in Model.GenderValues)
+        {
+            @Html.Label($"Gender{val}", val)
+            @Html.RadioButton("gender", val, false, new { id = $"Gender{val}" })
+        }
+    </div>
+
+    <div>
+        @Html.DropDownList("categoryId", Model.CategoriesForDropDown, "Select a category")
+    </div>
+    <div>
+        @Html.ListBox("categoryIds", Model.CategoriesForListBox, "Select categories")
+    </div>
+    <button>Send</button>
+}
+
+@Html.ActionLink("Create product", "CreateNewProduct", "Products")
+@Html.ActionLink("View product", "ViewProduct", "Products", new { id = 10 })
+
+<h4>@Url.Action("ViewProduct", "Products", new { id = 10 })</h4>
