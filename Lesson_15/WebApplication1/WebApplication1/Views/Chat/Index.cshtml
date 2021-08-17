@@ -1,0 +1,36 @@
+﻿
+
+<button id="btn-send-msg">Send message</button>
+
+
+
+
+@section Scripts {
+    <script src="~/js/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(() => {
+            const user = {
+                name: prompt('Your name: ', 'vasya')
+            };
+            const UI = {
+                btnSend$: $('#btn-send-msg')
+            };
+
+            UI.btnSend$.click(() => {
+                // вызов 'SendMessage' в хабе
+                hubConnection.invoke('sendMessage', { username: user.name, message: 'Hello world' });
+            });
+
+            const hubConnection = new signalR.HubConnectionBuilder()
+                .withUrl('/chathub')
+                .build();
+
+            hubConnection.on('receiveMessage', (msg) => {
+                console.log('Receive message from server: ' + msg.username, msg.message);
+            });
+
+            hubConnection.start();
+
+        });
+    </script>
+}
