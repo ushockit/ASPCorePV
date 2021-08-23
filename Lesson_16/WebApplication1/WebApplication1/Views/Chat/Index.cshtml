@@ -1,0 +1,83 @@
+﻿
+
+<div id="chat">
+    <ul class="list-group list-users">
+        @*<li class="list-group-item active" aria-current="true">An active item</li>
+        <li class="list-group-item">A second item</li>
+        <li class="list-group-item">A third item</li>
+        <li class="list-group-item">A fourth item</li>
+        <li class="list-group-item">And a fifth one</li>*@
+    </ul>
+    <div id="dialog">
+        <div id="messages"></div>
+        <button id="btn-send-msg">Send message</button>
+        <button id="btn-send-group-msg">Send group message</button>
+    </div>
+</div>
+
+
+
+
+@section Scripts {
+    <script src="~/js/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(() => {
+            let user = {
+                id: 0,
+                username: '',
+                connectionId: ''
+            };
+            let activeDialogUserId = 0;
+            const UI = {
+                btnSend$: $('#btn-send-msg'),
+                btnGroupSend$: $('#btn-send-group-msg'),
+            };
+
+            UI.btnSend$.click(() => {
+                // вызов 'SendMessage' в хабе
+                hubConnection.invoke('sendMessage', { username: user.username, message: 'Hello world' });
+            });
+
+            UI.btnGroupSend$.click(() => {
+                // вызов 'SendGroupMessage' в хабе
+                hubConnection.invoke('sendGroupMessage', { username: user.username, message: 'Hello world' });
+            });
+
+            const hubConnection = new signalR.HubConnectionBuilder()
+                .withUrl('/chathub')
+                .build();
+
+            hubConnection.on('receiveMessage', (msg) => {
+                console.log('Receive message from server: ' + msg.username, msg.message);
+            });
+
+            hubConnection.on('personalUserInfo', (info) => {
+                user = info;
+                console.log(user);
+            });
+
+
+            hubConnection.on('usersList', (users) => {
+                $.each(users, function () {
+                    if (user.id != this.id) {
+                        $('.list-users').append(`<li class="list-group-item" data-user-id="${this.id}">${this.username}</li>`);
+                    }
+                });
+                $('.list-group-item').click(function () {
+                    activeDialogUserId = Number($(this).data('user-id'));
+                });
+            });
+
+            hubConnection.on('newUserConnected', (user) => {
+                console.log('new user: ', user);
+                $('.list-users').append(`<li class="list-group-item" data-user-id="${user.id}">${user.username}</li>`);
+                $('.list-group-item').click(function () {
+                    activeDialogUserId = Number($(this).data('user-id'));
+                });
+            });
+
+            hubConnection.start();
+
+        });
+    </script>
+}

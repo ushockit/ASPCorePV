@@ -1,0 +1,93 @@
+﻿<h1>Game</h1>
+<canvas id="game-field" width="500" height="500" style="background: gray;">
+    <p>Ваш браузер не поддерживает рисование.</p>
+</canvas>
+
+@section Scripts {
+    <script src="~/js/signalr/dist/browser/signalr.min.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(() => {
+            const hubConnection = new signalR.HubConnectionBuilder()
+                .withUrl('/gamehub')
+                .build();
+            let circlePos = {
+                x: 100,
+                y: 100
+            };
+
+            hubConnection.on('move', (coord) => {
+                circlePos = coord;
+                drawCircle(coord);
+            });
+
+
+            hubConnection.start();
+
+            function drawCircle(pos) {
+                var context = drawingCanvas.getContext('2d');
+                canvasClear(context);
+                // Рисуем окружность
+                context.strokeStyle = "#000";
+                context.fillStyle = "#fc0";
+                context.beginPath();
+                context.arc(pos.x, pos.y, 50, 0, Math.PI * 2, true);
+                context.closePath();
+                context.stroke();
+                context.fill();
+            }
+            function canvasClear(context) {
+                context.clearRect(0, 0, drawingCanvas.width, drawingCanvas.height);
+            }
+
+            var drawingCanvas = document.getElementById('game-field');
+            if (drawingCanvas && drawingCanvas.getContext) {
+                
+                drawCircle(circlePos);
+
+                $(document).keydown((key) =>
+                {
+                    switch (key.key) {
+                        case 'ArrowRight':
+
+                            break;
+                        case 'ArrowLeft':
+                            circlePos.x -= 2;
+                            hubConnection.send('move', circlePos);
+                            drawCircle(circlePos);
+                            break;
+                        case 'ArrowUp':
+
+                            break;
+
+                        case 'ArrowDown':
+
+                            break;
+                    }
+                });
+
+                // Рисуем левый глаз
+                //context.fillStyle = "#fff";
+                //context.beginPath();
+                //context.arc(84, 90, 8, 0, Math.PI * 2, true);
+                //context.closePath();
+                //context.stroke();
+                //context.fill();
+                //// Рисуем правый глаз
+                //context.beginPath();
+                //context.arc(116, 90, 8, 0, Math.PI * 2, true);
+                //context.closePath();
+                //context.stroke();
+                //context.fill();
+                //// Рисуем рот
+                //context.beginPath();
+                //context.moveTo(70, 115);
+                //context.quadraticCurveTo(100, 130, 130, 115);
+                //context.quadraticCurveTo(100, 150, 70, 115);
+                //context.closePath();
+                //context.stroke();
+                //context.fill();
+            }
+
+        });
+    </script>
+}
