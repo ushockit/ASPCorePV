@@ -1,0 +1,16 @@
+﻿@using System.Globalization
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<h1>@Localizer["WelcomeTitle"]</h1>
+<p>Culture: @CultureInfo.CurrentCulture.Name</p>
+<p>Culture UI: @CultureInfo.CurrentUICulture.Name</p>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<h3>@SharedLocalizer["Settings"]</h3>
