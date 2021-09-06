@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="AutoMapper" />
+    <None Remove="MediatR" />
+    <None Remove="MediatR.Extensions.Microsoft.DependencyInjection" />
+    <None Remove="MediatR.Extensions.Autofac.DependencyInjection" />
+    <None Remove="GeneralMapping\" />
+    <None Remove="Feautures\" />
+    <None Remove="Feautures\Commands\" />
+    <None Remove="Feautures\Queries\" />
+    <None Remove="Feautures\Queries\GetAllProducts\" />
+    <None Remove="Interfaces\" />
+    <None Remove="Dtos\" />
+    <None Remove="Dtos\Products\" />
+    <None Remove="AutoMapper.Extensions.Microsoft.DependencyInjection" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="MediatR" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+    <PackageReference Include="MediatR.Extensions.Autofac.DependencyInjection" Version="7.3.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Mapping\" />
+    <Folder Include="Feautures\" />
+    <Folder Include="Feautures\Commands\" />
+    <Folder Include="Feautures\Queries\" />
+    <Folder Include="Feautures\Queries\GetAllProducts\" />
+    <Folder Include="Interfaces\" />
+    <Folder Include="Dtos\" />
+    <Folder Include="Dtos\Products\" />
+  </ItemGroup>
+</Project>
